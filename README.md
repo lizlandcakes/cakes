@@ -43,6 +43,12 @@ Then Settings > Custom Domains to attach your domain.
 - Cakes added in `/admin` appear on the website within about a minute, ahead of the built-in photos.
 - Enquiries can only be read by the admin account (Row Level Security).
 
+## Photos
+Cake photos are real files in `public/images/cakes/full` (large) and `public/images/cakes/thumb` (grid). The list with categories is the `CAKES` / `CAKES.push(...)` block in `public/index.html`. New cakes are easiest to add in `/admin`.
+
+## Business details used on the site
+Lizland Cakes, 0746213847 (WhatsApp and call), Jogoo Kimakia next to ACK Memoria, Thika, open daily 8:00 AM to 9:00 PM, TikTok @Lizlandcakes (linked). Facebook and Instagram show the name Liz Albert; paste the exact profile links into `CONFIG.social` in `public/index.html`.
+
 ## Still to do
 - Social links: search `CONFIG` in `public/index.html`.
 - The 3 built-in photos live inside `index.html`; move them into the admin if you want to delete them from the site.
