@@ -194,7 +194,7 @@ document.querySelectorAll('[data-wa]').forEach(a=>{a.href=wa(a.dataset.wa);a.tar
 const $=s=>document.querySelector(s);
 // gallery
 let cur="All";const f=$('#filters'),g=$('#grid');
-["All",...CATS].forEach(c=>{const b=document.createElement('button');b.textContent=c;b.onclick=()=>{cur=c;draw()};f.append(b)});
+function buildF(){f.innerHTML="";["All",...CATS].forEach(c=>{const b=document.createElement('button');b.textContent=c;b.onclick=()=>{cur=c;draw()};f.append(b)})}buildF();
 function draw(){[...f.children].forEach(b=>b.classList.toggle('on',b.textContent==cur));g.innerHTML="";
 const l=CAKES.filter(x=>cur=="All"||x.cat==cur);
 if(!l.length){g.innerHTML=`<div class="empty"><h3>${cur} cakes</h3><p>Photos for this category are being added. Ask Lizland Cakes on WhatsApp to see recent ${cur.toLowerCase()} designs.</p><br><a class="btn ink" target="_blank" href="${wa('Hello, please show me your '+cur+' cakes.')}">ASK ON WHATSAPP</a></div>`;return}
@@ -206,8 +206,8 @@ function step(n){LI=(LI+n+LST.length)%LST.length;show()}
 lb.onclick=e=>{if(e.target==lb||e.target.classList.contains('x'))lb.classList.remove('on')};
 lb.querySelector('.l').onclick=()=>step(-1);lb.querySelector('.r').onclick=()=>step(1);
 let sx=0;lb.ontouchstart=e=>sx=e.touches[0].clientX;lb.ontouchend=e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)step(d<0?1:-1)};draw();
-$('#sig').innerHTML=CAKES.slice(0,3).map((x,n)=>`<div class="sg rv"><div class="im"><img loading="lazy" src="${x.i}" alt="${x.t}"></div><div><p class="eyebrow">${x.cat}</p><h2>${x.t}</h2><p style="margin-top:14px">${x.d}</p><div class="row"><button class="btn" data-n="${n}">VIEW DETAILS</button><button class="btn gold" data-o="${n}">ORDER VIA WHATSAPP</button></div></div></div>`).join("");
-document.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>open(CAKES[b.dataset.n]));document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>orderCake(CAKES[b.dataset.o]));
+function renderSig(){$('#sig').innerHTML=CAKES.slice(0,3).map((x,n)=>`<div class="sg rv"><div class="im"><img loading="lazy" src="${x.i}" alt="${x.t}"></div><div><p class="eyebrow">${x.cat}</p><h2>${x.t}</h2><p style="margin-top:14px">${x.d}</p><div class="row"><button class="btn" data-n="${n}">VIEW DETAILS</button><button class="btn gold" data-o="${n}">ORDER VIA WHATSAPP</button></div></div></div>`).join("");
+document.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>open(CAKES[b.dataset.n]));document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>orderCake(CAKES[b.dataset.o]));}renderSig();
 $('#gram').innerHTML=[IMG.a,IMG.b,IMG.c].map(s=>`<img loading="lazy" src="${s}" alt="Lizland Cakes creation">`).join("");
 $('#soc').innerHTML=Object.entries(CONFIG.social).map(([k,v])=>v?`<a class="btn ink" target="_blank" rel="noopener" href="${v}">${k.toUpperCase()}</a>`:`<span class="btn ink" style="opacity:.5" title="Profile link to be configured">${k.toUpperCase()} (link to be added)</span>`).join("");
 // nav, reveal, loader
@@ -227,7 +227,7 @@ const waitL=()=>setTimeout(hideL,Math.max(0,(rmL?300:4600)-(performance.now()-tL
 document.readyState=='complete'?waitL():addEventListener('load',waitL);$('#load').addEventListener('click',hideL);setTimeout(hideL,9000);
 // forms -> WhatsApp
 function send(form,build){form.onsubmit=e=>{e.preventDefault();if(!form.checkValidity())return form.reportValidity();open2(wa(build(Object.fromEntries(new FormData(form)))))}}
-const open2=u=>window.open(u,'_blank','noopener');
+const open2=u=>{try{const t=new URL(u).searchParams.get('text')||'',f=t.split('\n')[0],type=/Custom/.test(f)?'custom':/Training/.test(f)?'training':/order/i.test(f)?'order':'contact',g=k=>(t.match(new RegExp('^'+k+': (.*)$','m'))||[])[1]||'';fetch('/api/enquiries',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type,name:g('Name'),phone:g('Phone'),message:t,website:''})}).catch(()=>{})}catch(e){}window.open(u,'_blank','noopener')};
 send($('#cf'),d=>`*Custom cake request*\nName: ${d.name}\nPhone: ${d.phone}\nOccasion: ${d.occ}\nTiers: ${d.tiers}\nColour: ${d.col}\nStyle: ${d.style}\nDecorations: ${[...$('#cf').querySelectorAll('.chips input:checked')].map(c=>c.value).join(', ')||'-'}\nMessage: ${d.msg||'-'}\nCollection/delivery: ${d.del}\nEvent date: ${d.date}\nNotes: ${d.more||'-'}`);
 send($('#tf'),d=>`*Training enquiry*\nName: ${d.name}\nPhone: ${d.phone}\nTraining: ${d.tr}\nExperience: ${d.exp}\nMessage: ${d.m||'-'}`);
 send($('#qf'),d=>`*Enquiry*\nName: ${d.name}\nPhone: ${d.phone}\n${d.m}`);
@@ -236,6 +236,10 @@ const cf=$('#cf'),pv=$('#pv');function prev(){const n=+cf.tiers.value;pv.querySe
 for(let i=0;i<n;i++){const t=document.createElement('div');t.className='t';const w=260-i*(200/Math.max(n,2));t.style.cssText=`width:${w}px;height:${Math.min(70,260/n)}px;background:${cf.col.value};margin-bottom:-2px`;pv.insertBefore(t,pv.querySelector('.base').nextSibling)}
 pv.querySelector('.msg').textContent=cf.msg.value}
 cf.oninput=cf.onchange=prev;prev();
+// load cakes added in the admin dashboard
+fetch('/api/cakes').then(r=>r.ok?r.json():null).then(d=>{if(!d)return;const S=s=>String(s||'').replace(/[<>"]/g,'');(d.categories||[]).forEach(c=>{c=S(c);if(c&&!CATS.includes(c))CATS.push(c)});
+const db=(d.cakes||[]).filter(x=>/^https:\/\//.test(x.image_url||'')).map(x=>({i:x.image_url,cat:S(x.category),t:S(x.name),d:S(x.description)}));
+if(db.length||(d.categories||[]).length){CAKES.unshift(...db);buildF();draw();renderSig()}}).catch(()=>{});
 // cake city style nav + ordering
 $('#scrim').onclick=()=>tog(false);$('#top').onclick=()=>scrollTo({top:0,behavior:'smooth'});
 document.querySelectorAll('.sub').forEach(b=>b.onclick=()=>{const p=b.parentElement;p.classList.toggle('open');b.textContent=p.classList.contains('open')?'−':'+'});

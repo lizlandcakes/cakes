@@ -1,0 +1,65 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Lizland Cakes Admin</title>
+<style>
+:root{--plum:#241030;--gold:#c9a35b;--bg:#faf5ef;--ink:#2a1633}*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--ink)}
+header{background:var(--plum);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+nav{display:flex;gap:8px;flex-wrap:wrap}main{max-width:1100px;margin:auto;padding:18px}
+.b{border:1px solid var(--gold);background:#fff;color:var(--ink);padding:10px 14px;min-height:44px;cursor:pointer;border-radius:6px;font:inherit}.gold{background:var(--gold);color:var(--plum);border-color:var(--gold)}
+header .b{background:none;color:#fff}header .b.on{background:var(--gold);color:var(--plum)}
+.card{background:#fff;border:1px solid #e6d9c8;border-radius:10px;padding:14px;margin-bottom:14px;display:grid;gap:10px}
+label{display:grid;gap:4px;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}label.row{display:flex;gap:8px;align-items:center;text-transform:none}
+input,select,textarea{font:inherit;padding:10px;border:1px solid #cdb99a;border-radius:6px;width:100%;background:#fff}input[type=checkbox]{width:auto}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}.grid .card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;background:#eee}
+#login{min-height:100vh;display:grid;place-items:center;background:var(--plum)}#lf{background:#fff;padding:28px;border-radius:12px;display:grid;gap:12px;width:min(92vw,360px)}
+pre{white-space:pre-wrap;margin:0;font:inherit}.tag{font-size:.7rem;background:var(--plum);color:#fff;padding:2px 8px;border-radius:20px}
+.bar{display:flex;gap:10px;flex-wrap:wrap}.bar>*{width:auto}
+</style></head><body>
+<div id="login"><form id="lf"><h1 style="margin:0">Lizland Cakes Admin</h1><input id="em" type="email" placeholder="Email" required autocomplete="username"><input id="pw" type="password" placeholder="Password" required autocomplete="current-password"><button class="b gold">Log in</button><p id="lm" role="alert" style="color:#b00020;margin:0"></p></form></div>
+<div id="app" hidden><header><b>Lizland Cakes Admin</b><nav><button class="b" data-t="cakes">Cakes</button><button class="b" data-t="enq">Enquiries</button><button class="b" data-t="cats">Categories</button><button class="b" id="out">Log out</button></nav></header><main id="main"></main></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let sb,cats=[],CK=[],ENQ=[];
+const STATUS=['new','contacted','confirmed','done','cancelled'],TYPES={order:'Cake order',custom:'Custom cake',training:'Training',contact:'Contact'};
+const err=e=>{$('#main').innerHTML='<div class="card">Error: '+esc(e.message||e)+'</div>'};
+async function init(){const c=await fetch('/api/config').then(r=>r.json()).catch(()=>({}));
+if(!c.url||!c.anonKey){$('#lm').textContent='Supabase is not configured on the server yet (SUPABASE_URL and SUPABASE_ANON_KEY).';return}
+sb=supabase.createClient(c.url,c.anonKey);const{data:{session}}=await sb.auth.getSession();if(session)enter()}
+async function enter(){const{data:{user}}=await sb.auth.getUser();if(!user)return;
+const{data}=await sb.from('admins').select('user_id').eq('user_id',user.id);
+if(!data||!data.length){await sb.auth.signOut();$('#lm').textContent='This account is not an administrator.';return}
+$('#login').hidden=true;$('#app').hidden=false;await loadCats();show('cakes')}
+$('#lf').onsubmit=async e=>{e.preventDefault();$('#lm').textContent='';if(!sb)return;
+const{error}=await sb.auth.signInWithPassword({email:$('#em').value.trim(),password:$('#pw').value});
+if(error)return $('#lm').textContent=error.message;enter()};
+$('#out').onclick=async()=>{await sb.auth.signOut();location.reload()};
+document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>show(b.dataset.t));
+function show(t){document.querySelectorAll('[data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t==t));({cakes:renderCakes,enq:renderEnq,cats:renderCats})[t]()}
+async function loadCats(){const{data}=await sb.from('categories').select('name').order('sort').order('name');cats=(data||[]).map(c=>c.name)}
+async function resize(f){const b=await createImageBitmap(f),s=Math.min(1,1400/Math.max(b.width,b.height)),c=document.createElement('canvas');c.width=Math.round(b.width*s);c.height=Math.round(b.height*s);c.getContext('2d').drawImage(b,0,0,c.width,c.height);return new Promise(r=>c.toBlob(r,'image/jpeg',.82))}
+const pathOf=u=>(u||'').split('/cake-photos/')[1];
+async function renderCakes(){const{data,error}=await sb.from('cakes').select('*').order('created_at',{ascending:false});if(error)return err(error);CK=data;
+$('#main').innerHTML=`<h2>Add or edit a cake</h2><form id="cf2" class="card"><input type="hidden" id="cid"><label>Name<input id="cn" required maxlength="80"></label><label>Category<select id="cc">${cats.map(c=>`<option>${esc(c)}</option>`).join('')}</select></label><label>Description<textarea id="cd" rows="3" maxlength="400"></textarea></label><label>Photo (resized automatically)<input id="cp" type="file" accept="image/*"></label><label class="row"><input type="checkbox" id="cpub" checked> Published (visible on the website)</label><p id="cm" role="status"></p><div class="bar"><button class="b gold">Save cake</button><button type="button" class="b" id="cx">Clear</button></div></form><h2>Cakes (${data.length})</h2><div class="grid">${data.map(c=>`<div class="card">${c.image_url?`<img src="${esc(c.image_url)}" alt="">`:''}<b>${esc(c.name)}</b><small>${esc(c.category)}${c.published?'':' · hidden'}</small><div class="bar"><button class="b" data-e="${c.id}">Edit</button><button class="b" data-d="${c.id}">Delete</button></div></div>`).join('')}</div>`;
+$('#cx').onclick=()=>show('cakes');
+$('#cf2').onsubmit=async e=>{e.preventDefault();const m=$('#cm');m.textContent='Saving…';try{
+const id=$('#cid').value,old=CK.find(c=>c.id==id),f=$('#cp').files[0];let url=old?old.image_url:null;
+if(f){const blob=await resize(f),p=crypto.randomUUID()+'.jpg',u=await sb.storage.from('cake-photos').upload(p,blob,{contentType:'image/jpeg'});if(u.error)throw u.error;
+url=sb.storage.from('cake-photos').getPublicUrl(p).data.publicUrl;if(old&&pathOf(old.image_url))await sb.storage.from('cake-photos').remove([pathOf(old.image_url)])}
+if(!url)throw new Error('Please choose a photo.');
+const row={name:$('#cn').value.trim(),category:$('#cc').value,description:$('#cd').value.trim(),image_url:url,published:$('#cpub').checked};
+const r=id?await sb.from('cakes').update(row).eq('id',id):await sb.from('cakes').insert(row);if(r.error)throw r.error;show('cakes')}catch(x){m.textContent='Error: '+(x.message||x)}}}
+async function renderEnq(){const{data,error}=await sb.from('enquiries').select('*').order('created_at',{ascending:false}).limit(300);if(error)return err(error);ENQ=data;
+$('#main').innerHTML=`<h2>Enquiries (${data.length})</h2><div class="bar card" style="display:flex"><select id="ft"><option value="">All types</option>${Object.entries(TYPES).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select><select id="fs"><option value="">All statuses</option>${STATUS.map(s=>`<option>${s}</option>`).join('')}</select></div><div id="el"></div>`;
+$('#ft').onchange=$('#fs').onchange=drawEnq;drawEnq()}
+function drawEnq(){const t=$('#ft').value,s=$('#fs').value;$('#el').innerHTML=ENQ.filter(e=>(!t||e.type==t)&&(!s||e.status==s)).map(e=>{let p=(e.phone||'').replace(/\D/g,'');if(p.startsWith('0'))p='254'+p.slice(1);
+return`<div class="card"><div class="bar"><span class="tag">${esc(TYPES[e.type]||e.type)}</span><small>${new Date(e.created_at).toLocaleString()}</small></div><b>${esc(e.name||'No name')} ${esc(e.phone||'')}</b><pre>${esc(e.message)}</pre><div class="bar"><select data-st="${e.id}">${STATUS.map(x=>`<option${x==e.status?' selected':''}>${x}</option>`).join('')}</select>${p.length>=11?`<a class="b" target="_blank" rel="noopener" href="https://wa.me/${p}">Reply on WhatsApp</a>`:''}<button class="b" data-x="${e.id}">Delete</button></div></div>`}).join('')||'<p>No enquiries yet.</p>'}
+async function renderCats(){await loadCats();$('#main').innerHTML=`<h2>Categories</h2><form id="kf" class="card bar" style="display:flex"><input id="kn" placeholder="New category name" required maxlength="40" style="flex:1"><button class="b gold">Add</button></form>${cats.map(c=>`<div class="card bar" style="display:flex;justify-content:space-between;align-items:center"><span>${esc(c)}</span><button class="b" data-k="${esc(c)}">Delete</button></div>`).join('')}`;
+$('#kf').onsubmit=async e=>{e.preventDefault();const r=await sb.from('categories').insert({name:$('#kn').value.trim(),sort:cats.length+1});if(r.error)return alert(r.error.message);renderCats()}}
+$('#main').onclick=async e=>{const b=e.target.closest('button');if(!b)return;
+if(b.dataset.e){const c=CK.find(x=>x.id==b.dataset.e);$('#cid').value=c.id;$('#cn').value=c.name;$('#cc').value=c.category;$('#cd').value=c.description||'';$('#cpub').checked=c.published;$('#cm').textContent='Editing "'+c.name+'". Choose a new photo only if you want to replace it.';scrollTo({top:0,behavior:'smooth'})}
+if(b.dataset.d&&confirm('Delete this cake permanently?')){const c=CK.find(x=>x.id==b.dataset.d),r=await sb.from('cakes').delete().eq('id',c.id);if(r.error)return alert(r.error.message);if(pathOf(c.image_url))await sb.storage.from('cake-photos').remove([pathOf(c.image_url)]);renderCakes()}
+if(b.dataset.x&&confirm('Delete this enquiry?')){const r=await sb.from('enquiries').delete().eq('id',b.dataset.x);if(r.error)return alert(r.error.message);renderEnq()}
+if(b.dataset.k&&confirm('Delete category "'+b.dataset.k+'"?')){const r=await sb.from('categories').delete().eq('name',b.dataset.k);if(r.error)return alert(r.error.message);renderCats()}};
+$('#main').onchange=async e=>{const s=e.target.closest('select[data-st]');if(!s)return;const r=await sb.from('enquiries').update({status:s.value}).eq('id',s.dataset.st);if(r.error)alert(r.error.message);else{const q=ENQ.find(x=>x.id==s.dataset.st);if(q)q.status=s.value}};
+init();
+</script></body></html>
