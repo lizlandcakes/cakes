@@ -1,65 +1,372 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Lizland Cakes Admin</title>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lizland Cakes | Wedding, Birthday & Custom Cakes in Thika</title>
+<meta name="description" content="Lizland Cakes in Thika, Kenya: wedding, birthday, ruracio, graduation, anniversary and custom cakes, plus cake decorating training.">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Lizland Cakes"><meta property="og:locale" content="en_KE"><meta property="og:title" content="Lizland Cakes | Cakes in Thika, Kenya"><meta property="og:description" content="Wedding, birthday, ruracio, graduation and custom cakes in Thika, Kenya. Order on WhatsApp 0746213847."><meta property="og:url" content="%SITE_URL%/"><meta property="og:image" content="%SITE_URL%/images/og-image.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="Lizland Cakes baker beside a tall tiered wedding cake"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Lizland Cakes | Cakes in Thika, Kenya"><meta name="twitter:description" content="Wedding, birthday, ruracio, graduation and custom cakes in Thika, Kenya. Order on WhatsApp 0746213847."><meta name="twitter:image" content="%SITE_URL%/images/og-image.jpg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/favicon.ico" sizes="48x48"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><meta name="theme-color" content="#d9628b"><link rel="canonical" href="%SITE_URL%/"><text y=%22.9em%22 font-size=%2290%22>🎂</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Bakery","name":"Lizland Cakes","telephone":"+254746213847","address":{"@type":"PostalAddress","streetAddress":"Jogoo Kimakia, next to ACK Memoria","addressLocality":"Thika","addressCountry":"KE"},"openingHours":"Mo-Su 08:00-21:00","sameAs":["https://www.tiktok.com/@lizlandcakes"]}</script>
 <style>
-:root{--plum:#3a1d16;--gold:#c8845f;--bg:#fff6ef;--ink:#3a1d16}*{box-sizing:border-box}
-body{margin:0;font:15px/1.5 system-ui,sans-serif;background:var(--bg);color:var(--ink)}
-header{background:var(--plum);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
-nav{display:flex;gap:8px;flex-wrap:wrap}main{max-width:1100px;margin:auto;padding:18px}
-.b{border:1px solid var(--gold);background:#fff;color:var(--ink);padding:10px 14px;min-height:44px;cursor:pointer;border-radius:6px;font:inherit}.gold{background:var(--gold);color:var(--plum);border-color:var(--gold)}
-header .b{background:none;color:#fff}header .b.on{background:var(--gold);color:var(--plum)}
-.card{background:#fff;border:1px solid #e6d9c8;border-radius:10px;padding:14px;margin-bottom:14px;display:grid;gap:10px}
-label{display:grid;gap:4px;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em}label.row{display:flex;gap:8px;align-items:center;text-transform:none}
-input,select,textarea{font:inherit;padding:10px;border:1px solid #cdb99a;border-radius:6px;width:100%;background:#fff}input[type=checkbox]{width:auto}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}.grid .card img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:6px;background:#eee}
-#login{min-height:100vh;display:grid;place-items:center;background:var(--plum)}#lf{background:#fff;padding:28px;border-radius:12px;display:grid;gap:12px;width:min(92vw,360px)}
-pre{white-space:pre-wrap;margin:0;font:inherit}.tag{font-size:.7rem;background:var(--plum);color:#fff;padding:2px 8px;border-radius:20px}
-.bar{display:flex;gap:10px;flex-wrap:wrap}.bar>*{width:auto}
-</style></head><body>
-<div id="login"><form id="lf"><h1 style="margin:0">Lizland Cakes Admin</h1><input id="em" type="email" placeholder="Email" required autocomplete="username"><input id="pw" type="password" placeholder="Password" required autocomplete="current-password"><button class="b gold">Log in</button><p id="lm" role="alert" style="color:#b00020;margin:0"></p></form></div>
-<div id="app" hidden><header><b>Lizland Cakes Admin</b><nav><button class="b" data-t="cakes">Cakes</button><button class="b" data-t="enq">Enquiries</button><button class="b" data-t="cats">Categories</button><button class="b" id="out">Log out</button></nav></header><main id="main"></main></div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+:root{--plum:#4a2130;--plum2:#8a3a5c;--blush:#f2c4cf;--cream:#fff3f1;--gold:#d9628b;--lav:#f3d9d3;--ink:#3a1d16;--bg:#fff3f1;--fg:#3a1d16;--card:#fff}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#2a1118;--fg:#fbeee8;--card:#43202e}}
+:root[data-theme=dark]{--bg:#2a1118;--fg:#fbeee8;--card:#43202e}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth;scroll-padding-top:70px}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{background:var(--bg);color:var(--fg);font:300 16px/1.7 Jost,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:500;line-height:1.1}
+h2{font-size:clamp(2rem,5vw,3.4rem)}.eyebrow{letter-spacing:.3em;font-size:.72rem;text-transform:uppercase;color:var(--gold)}
+section{padding:90px 6vw}a{color:inherit}
+nav{position:fixed;inset:0 0 auto;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:14px 6vw;padding-top:calc(14px + env(safe-area-inset-top,0px));background:rgba(74,33,48,.55);backdrop-filter:blur(14px);color:#fff}
+nav b{font:600 1.5rem 'Cormorant Garamond',serif;letter-spacing:.05em}
+nav ul{display:flex;gap:26px;list-style:none;padding:0;font-size:.78rem;letter-spacing:.15em}
+nav a{text-decoration:none;position:relative}nav ul a::after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:0;background:var(--gold);transition:.3s}nav ul a:hover::after{width:100%}
+#burger{display:none;background:none;border:0;color:#fff;font-size:1.6rem}
+@media(max-width:860px){#burger{display:block}nav ul{position:fixed;inset:60px 0 auto;flex-direction:column;background:var(--plum);padding:24px 6vw;gap:18px;transform:translateY(-130%);transition:.4s}nav ul.open{transform:none}}
+.btn{display:inline-block;padding:14px 28px;border:1px solid var(--gold);color:#fff;text-decoration:none;letter-spacing:.18em;font-size:.75rem;background:none;cursor:pointer;font-family:inherit;transition:.3s}
+.btn.gold{background:linear-gradient(135deg,#f8a8c2,var(--gold));color:var(--plum);border-color:transparent}.btn:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(217,98,139,.35)}
+.dark .btn,.alt .btn{color:#fff}.btn.ink{color:var(--fg)}
+#hero{min-height:100vh;position:relative;background:radial-gradient(ellipse at 70% 40%,#b4577a,var(--plum) 60%,#2d1020);color:#fff;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;padding-top:110px;overflow:hidden}
+#hero h1{font-size:clamp(2.6rem,6.2vw,5.4rem)}#hero h1 em{color:var(--blush)}#hero p{max-width:480px;margin:22px 0 32px;opacity:.85}
+#stage{height:min(80vh,640px);position:relative;touch-action:pan-y;cursor:grab}#stage canvas{width:100%!important;height:100%!important}
+#stage img{display:none;width:100%;height:100%;object-fit:cover;border-radius:200px 200px 20px 20px}
+.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 30%;opacity:.32}#hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--plum) 5%,rgba(74,33,48,.35) 55%,rgba(74,33,48,.7))}#hero>div{position:relative;z-index:2}
+.hint{position:absolute;bottom:6px;width:100%;text-align:center;font-size:.7rem;letter-spacing:.25em;opacity:.6}
+@media(max-width:860px){#hero{grid-template-columns:1fr;text-align:center;padding-top:100px}#hero p{margin-inline:auto}#stage{height:48vh}}
+.rv{opacity:0;transform:translateY(34px);transition:1s cubic-bezier(.2,.7,.2,1)}.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:30px 0}.filters button{border:1px solid var(--gold);background:none;color:var(--fg);padding:9px 18px;letter-spacing:.1em;font:inherit;font-size:.8rem;cursor:pointer}.filters .on{background:var(--gold);color:var(--plum)}
+#grid{columns:3 260px;column-gap:18px}
+.tile{break-inside:avoid;margin-bottom:18px;position:relative;overflow:hidden;cursor:zoom-in;background:var(--plum)}
+.tile img{width:100%;display:block;transition:transform 1.2s}.tile:hover img{transform:scale(1.07)}
+.tile div{position:absolute;inset:auto 0 0;padding:50px 18px 16px;background:linear-gradient(transparent,rgba(74,33,48,.9));color:#fff;transform:translateY(40%);transition:.4s}.tile:hover div{transform:none}
+.tile small{color:var(--blush);letter-spacing:.2em;text-transform:uppercase;font-size:.65rem}.tile h3{font-size:1.4rem}
+.empty{border:1px dashed var(--gold);padding:40px;text-align:center;break-inside:avoid}
+#lb{position:fixed;inset:0;background:rgba(45,16,32,.95);z-index:100;display:none;align-items:center;justify-content:center;flex-direction:column;color:#fff;padding:20px;text-align:center}
+#lb.on{display:flex}#lb img{max-width:92vw;max-height:72vh;object-fit:contain}#lb .x{position:absolute;top:18px;right:24px;font-size:2rem;background:none;border:0;color:#fff;cursor:pointer}
+.sig{display:grid;gap:70px}.sg{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}.sg:nth-child(even) .im{order:2}
+.sg img{width:100%;max-height:640px;object-fit:cover;border-radius:260px 260px 8px 8px}
+@media(max-width:860px){.sg{grid-template-columns:1fr}.sg:nth-child(even) .im{order:0}}
+.sg .row{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.dark{background:var(--plum);color:#fff}.why{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;margin-top:40px}
+.why div{padding:28px;border-top:1px solid var(--gold);background:rgba(255,255,255,.05)}.why i{font-size:1.8rem;font-style:normal;color:var(--gold)}
+.alt{background:linear-gradient(135deg,var(--plum2),var(--plum));color:#fff}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:50px}@media(max-width:860px){.two{grid-template-columns:1fr}}
+form{display:grid;gap:14px}label{font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;opacity:.8;display:grid;gap:6px}
+input,select,textarea{font:inherit;padding:12px;border:1px solid rgba(217,98,139,.6);background:rgba(255,255,255,.9);color:#3a1d16;width:100%}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chips label{display:flex;gap:6px;align-items:center;text-transform:none;letter-spacing:0;font-size:.9rem;opacity:1;width:auto}.chips input{width:auto}
+#pv{height:340px;display:flex;flex-direction:column-reverse;align-items:center;justify-content:flex-start;padding-bottom:10px;background:rgba(255,255,255,.06);position:relative}
+#pv .t{border-radius:8px;transition:.5s;box-shadow:inset -10px 0 20px rgba(0,0,0,.12),0 6px 14px rgba(0,0,0,.25)}
+#pv .base{width:300px;height:10px;background:var(--gold);border-radius:6px}#pv .msg{position:absolute;top:14px;font:italic 1.5rem 'Cormorant Garamond',serif;color:var(--gold)}
+.gram{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.gram img{width:100%;aspect-ratio:1;object-fit:cover}
+.soc{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+#wa{position:fixed;right:18px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:60;background:#25d366;color:#fff;width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-size:1.7rem;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+#load{position:fixed;inset:0;z-index:200;background:radial-gradient(ellipse at 50% 40%,#b4577a,#3a1d16 65%,#2d1020);color:#fff;overflow:hidden;cursor:pointer;transition:opacity .9s,visibility 0s .9s}
+#load.out{opacity:0;visibility:hidden}#load .c{position:absolute;inset:0;transition:transform .9s}#load.out .c{transform:scale(1.08)}
+#load .arch{position:absolute;inset:0;opacity:0;clip-path:inset(calc(50% - 150px) calc(50% - 110px) calc(50% - 150px) calc(50% - 110px) round 999px 999px 14px 14px);animation:pop .6s .2s ease forwards,grow 1.9s 1.1s cubic-bezier(.7,0,.2,1) forwards}
+#load img{width:100%;height:100%;object-fit:cover;object-position:50% 58%;display:block;animation:kb 5s .2s ease-out forwards}
+#load .shade{position:absolute;inset:0;background:linear-gradient(transparent 40%,rgba(45,16,32,.88));opacity:0;animation:pop .8s 2.6s forwards}
+#load .txt{position:absolute;left:0;right:0;bottom:calc(8vh + env(safe-area-inset-bottom,0px));text-align:center;padding:0 6vw}
+#load b{display:block;font:italic 600 clamp(2rem,7vw,3.4rem) 'Cormorant Garamond',serif;letter-spacing:.06em;opacity:0;animation:fu 1s 2.7s forwards}
+#load span.t{display:block;font-size:.7rem;letter-spacing:.35em;color:var(--blush);margin-top:6px;opacity:0;animation:fu 1s 3.1s forwards}
+#load .bar{width:min(62vw,300px);height:2px;background:rgba(255,255,255,.2);margin:22px auto 0;overflow:hidden}#load .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),#ffc2d4);animation:fill 4.4s .2s ease-out forwards}
+#load .sp{position:absolute;bottom:8vh;width:4px;height:4px;border-radius:50%;background:var(--gold);opacity:0;animation:fl 4s infinite}
+@keyframes pop{to{opacity:1}}@keyframes grow{to{clip-path:inset(0 0 0 0 round 0 0 0 0)}}@keyframes kb{from{transform:scale(1.15)}to{transform:scale(1)}}
+@keyframes fu{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}@keyframes fill{to{width:100%}}@keyframes fl{0%{transform:translateY(0);opacity:0}20%{opacity:.9}100%{transform:translateY(-60vh);opacity:0}}
+@media(prefers-reduced-motion:reduce){#load *{animation-duration:.01s!important;animation-delay:0s!important}}
+footer{padding:30px 6vw;background:#2d1020;color:#ccc;font-size:.8rem;text-align:center}
+
+.skip{position:absolute;left:-999px}.skip:focus{left:10px;top:10px;z-index:300;background:#fff;color:#000;padding:8px}
+section{padding-inline:max(6vw,calc((100vw - 1240px)/2))}nav{padding-inline:max(6vw,calc((100vw - 1240px)/2))}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px}
+input,select,textarea{font-size:16px}nav.sc{background:rgba(74,33,48,.92)}nav a.act{color:var(--gold)}
+#burger{min-width:44px;min-height:44px}
+#lb .ar{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.14);border:0;color:#fff;font-size:2rem;width:48px;height:48px;border-radius:50%;cursor:pointer}#lb .l{left:10px}#lb .r{right:10px}#lb .x{min-width:44px;min-height:44px}
+#bar{display:none}
+@media(hover:none){.tile div{transform:none}}
+@media(max-width:1024px){nav ul{gap:16px;font-size:.7rem}section{padding-block:70px}}
+@media(max-width:860px){
+nav{backdrop-filter:none;background:rgba(74,33,48,.94)}nav b,#burger{position:relative;z-index:2}
+nav ul{position:fixed;inset:0;padding:90px 8vw 40px;gap:6px;justify-content:center;font-size:1.25rem;letter-spacing:.2em;background:var(--plum);transform:translateY(-100%);visibility:hidden;transition:transform .45s,visibility 0s .45s}
+nav ul.open{transform:none;visibility:visible;transition:transform .45s}
+nav ul a{display:block;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.1)}
+#hero{min-height:100svh;padding-bottom:30px}#pv{order:-1;height:260px}
+.filters{flex-wrap:nowrap;overflow-x:auto;margin-inline:-6vw;padding:0 6vw 6px}.filters button{flex:none;min-height:44px}}
+@media(max-width:600px){section{padding-block:56px}
+#bar{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;inset:auto 0 0;z-index:60;background:var(--plum);border-top:1px solid var(--gold);padding-bottom:env(safe-area-inset-bottom,0px)}
+#bar a{color:#fff;text-decoration:none;text-align:center;padding:16px 4px;font-size:.72rem;letter-spacing:.15em}#bar a:nth-child(2){background:#25d366}
+#wa{display:none}body{padding-bottom:calc(52px + env(safe-area-inset-bottom,0px))}}
+@media(max-width:480px){#hero .btn{display:flex;margin:10px auto 0;max-width:320px}}
+
+#ann{position:absolute;top:0;left:0;right:0;height:34px;z-index:51;background:var(--gold);color:var(--plum);font-size:.72rem;letter-spacing:.12em;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 10px;overflow:hidden;white-space:nowrap}
+nav{top:var(--bt,34px)}
+#fab{position:fixed;right:14px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+body.mo #fab{display:none}
+#fab a,#fab button{display:flex;align-items:center;justify-content:center;gap:8px;height:48px;min-width:48px;border-radius:30px;border:0;color:#fff;text-decoration:none;font:500 .85rem Jost,sans-serif;box-shadow:0 8px 22px rgba(0,0,0,.35);cursor:pointer}
+#fab .call{background:var(--plum2);border:1px solid var(--gold);font-size:1.2rem}#fab #top{background:var(--gold);color:var(--plum);font-size:1.2rem}#top[hidden]{display:none}
+#fab #wa{position:static;width:auto;height:48px;border-radius:30px;padding:0 18px 0 14px;background:#25d366;font-size:.85rem;display:flex;animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.55)}70%{box-shadow:0 0 0 14px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+@media(prefers-reduced-motion:reduce){#fab #wa{animation:none}}
+body{padding-bottom:0!important}
+#om{position:fixed;inset:0;z-index:110;background:rgba(45,16,32,.85);display:none;align-items:flex-end;justify-content:center}#om.on{display:flex}
+#ofm{background:var(--bg);color:var(--fg);width:min(520px,100%);max-height:92vh;overflow:auto;padding:26px;border-radius:18px 18px 0 0;position:relative}
+#ofm .x{position:absolute;top:8px;right:12px;background:none;border:0;font-size:2rem;color:var(--fg);cursor:pointer;min-width:44px;min-height:44px}
+@media(min-width:700px){#om{align-items:center}#ofm{border-radius:14px}}
+.sam{position:relative}.sam small{position:absolute;top:10px;right:12px;font-size:.6rem;letter-spacing:.18em;color:var(--gold)}
+@media(min-width:861px){.sub{display:none}.sm{position:absolute;top:100%;left:-14px;min-width:220px;background:rgba(74,33,48,.97);padding:12px 6px;display:none;border-top:1px solid var(--gold)}.has{position:relative}.has:hover .sm,.has:focus-within .sm{display:block}.sm a{display:block;padding:8px 14px;letter-spacing:.12em}}
+@media(max-width:860px){
+nav ul{inset:0 auto 0 0;width:min(86vw,360px);padding:76px 20px 30px;justify-content:flex-start;font-size:1rem;letter-spacing:.14em;transform:translateX(-102%);box-shadow:8px 0 40px rgba(0,0,0,.5);overflow-y:auto}
+nav ul.open{transform:none}
+#scrim{position:fixed;inset:0;background:rgba(35,10,22,.6);opacity:0;visibility:hidden;transition:.35s;z-index:49}#scrim.on{opacity:1;visibility:visible}
+.has{position:relative}.has>a{padding-right:50px}.has .sub{position:absolute;right:0;top:4px;width:44px;height:44px;background:none;border:0;color:var(--gold);font-size:1.6rem}
+.sm{max-height:0;overflow:hidden;transition:max-height .4s}.has.open .sm{max-height:480px}.sm a{padding:10px 0 10px 16px;font-size:.85rem;opacity:.85;border-bottom:0}
+#ann{font-size:.62rem;letter-spacing:.06em}}
+@media(max-width:480px){#fab #wa span{display:inline}}
+.tile img{aspect-ratio:3/4;object-fit:cover;background:#8a3a5c}.more{column-span:all;display:flex;margin:24px auto;color:var(--fg)}
+:root{--soft:#ffdde7}@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--soft:#3a1622}}:root[data-theme=dark]{--soft:#3a1622}#showroom,#reviews,#contact{background:var(--soft)}
+#hero{padding-inline:max(6vw,calc((100vw - 1240px)/2))}
+@media(max-width:860px){nav ul{padding-top:104px}}
+
+nav .nr{display:flex;align-items:center;gap:2px;order:3;position:relative;z-index:2}nav ul{order:2}nav b{order:1}
+#sbtn{background:none;border:0;color:#fff;min-width:44px;min-height:44px;display:grid;place-items:center;cursor:pointer}
+@media(min-width:861px){nav ul{margin-left:auto;margin-right:10px}}
+#trend{padding:44px 0 36px;background:linear-gradient(#ffc9d9,var(--bg))}
+#trend .th{padding-inline:max(6vw,calc((100vw - 1240px)/2));margin-bottom:18px}
+#trk{display:flex;gap:14px;overflow-x:auto;padding:4px max(6vw,calc((100vw - 1240px)/2)) 12px;scrollbar-width:none}#trk::-webkit-scrollbar{display:none}
+.tc{flex:0 0 min(60vw,240px);aspect-ratio:3/4;position:relative;border:0;padding:0;border-radius:18px;overflow:hidden;cursor:pointer;background:#fff;box-shadow:0 10px 26px rgba(217,98,139,.3)}
+.tc img{width:100%;height:100%;object-fit:cover;display:block}
+.tc span{position:absolute;inset:auto 0 0;padding:44px 14px 14px;text-align:left;color:#fff;font:500 1.15rem/1.15 'Cormorant Garamond',serif;background:linear-gradient(transparent,rgba(120,30,70,.9))}.tc small{display:block;font:400 .6rem Jost,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#ffd1de;margin-bottom:4px}
+#sr{position:fixed;inset:0;z-index:150;background:linear-gradient(#ffdce7,#fff3f1);color:#3a1d16;display:flex;flex-direction:column}#sr[hidden]{display:none}
+.srh{display:flex;gap:10px;align-items:center;padding:calc(12px + env(safe-area-inset-top,0px)) 16px 12px}
+.sri{flex:1;display:flex;align-items:center;gap:10px;background:#fff;border:2px solid #d9628b;border-radius:30px;padding:0 16px;color:#d9628b}.sri input{border:0;background:none;outline:none;font-size:16px;padding:14px 0;color:#3a1d16;min-width:0}
+#src{background:#d9628b;color:#fff;border:0;border-radius:50%;width:46px;height:46px;font-size:1.1rem;cursor:pointer}
+.srb{flex:1;overflow-y:auto;padding:4px 16px 40px;width:min(720px,100%);margin:0 auto}
+.srtrain{position:sticky;top:0;z-index:2;width:100%;text-align:left;border:0;cursor:pointer;border-radius:18px;padding:16px 18px;margin-bottom:12px;color:#fff;background:linear-gradient(135deg,#f58fb0,#d9628b);box-shadow:0 10px 24px rgba(217,98,139,.4)}
+.srtrain b{display:block;font:600 1.35rem 'Cormorant Garamond',serif}.srtrain small{opacity:.92;font-size:.8rem}
+.sl{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:#b04573;margin:16px 0 10px}
+.chips2{display:flex;flex-wrap:wrap;gap:8px}.sch{border:1px solid #d9628b;background:#fff;color:#8a2a52;border-radius:30px;padding:10px 16px;min-height:44px;font:inherit;cursor:pointer}
+.srr{display:flex;gap:12px;align-items:center;width:100%;text-align:left;background:#fff;border:0;border-radius:14px;padding:8px;margin-bottom:8px;cursor:pointer;color:#3a1d16;font:inherit;box-shadow:0 2px 10px rgba(217,98,139,.15)}
+.srr img{width:56px;height:56px;object-fit:cover;border-radius:10px;flex:none}.srr .ic{width:56px;height:56px;border-radius:10px;background:#ffd1de;color:#d9628b;display:grid;place-items:center;flex:none;font-size:1.3rem}
+.srr b{display:block;font-weight:500}.srr small{color:#8a5a6a}
+</style></head><body><a class="skip" href="#showroom">Skip to cakes</a><div id="ann">Order your cake on WhatsApp · Open daily 8:00 AM – 9:00 PM</div><div id="scrim"></div>
+<div id="load"><div class="c"><div class="arch"><img src="/images/loader.jpg" alt="Lizland Cakes baker finishing a celebration cake"></div><div class="shade"></div><div class="txt"><b>Welcome to Lizland Cakes</b><span class="t">BAKING YOUR CELEBRATION…</span><div class="bar"><i></i></div></div></div></div>
+<nav><b>Lizland Cakes</b><div class="nr"><button id="sbtn" aria-label="Search cakes"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></button><button id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">☰</button></div>
+<ul id="menu"><li><a href="#hero">HOME</a></li><li class="has"><a href="#showroom">OUR CAKES</a><button class="sub" aria-label="Show cake categories">+</button><div class="sm"><a href="#showroom" data-cat="Wedding">Wedding Cakes</a><a href="#showroom" data-cat="Birthday">Birthday Cakes</a><a href="#showroom" data-cat="Ruracio">Ruracio Cakes</a><a href="#showroom" data-cat="Graduation">Graduation Cakes</a><a href="#showroom" data-cat="Anniversary">Anniversary Cakes</a><a href="#showroom" data-cat="Baby Shower">Baby Shower Cakes</a><a href="#showroom" data-cat="Custom">Custom Cakes</a><a href="#showroom" data-cat="Cupcakes &amp; Pastries">Cupcakes &amp; Pastries</a></div></li><li><a href="#custom">CUSTOM ORDERS</a></li><li><a href="#training">TRAINING</a></li><li><a href="#about">ABOUT</a></li><li><a href="#contact">CONTACT</a></li></ul></nav>
+<div id="fab"><button id="top" aria-label="Back to top" hidden>↑</button><a class="call" href="tel:+254746213847" aria-label="Call Lizland Cakes">☎</a><a id="wa" href="#" data-wa="Hello Lizland Cakes, I would like to make an enquiry." aria-label="WhatsApp us">✆ <span>WhatsApp us</span></a></div>
+
+<header id="hero"><img class="bg" id="bg" alt=""><div><p class="eyebrow">Thika · Kenya</p><h1>Every Celebration Deserves a <em>Masterpiece.</em></h1>
+<p>Beautifully crafted cakes, designed to make your special moments unforgettable.</p>
+<a class="btn gold" href="#showroom">EXPLORE OUR CAKES</a> <a class="btn" href="#custom">ORDER YOUR CAKE</a></div>
+<div id="stage"><img id="fb" alt="Baker beside a tiered wedding cake by Lizland Cakes"><button class="btn" id="replay" style="position:absolute;top:0;right:0;padding:8px 14px;z-index:3">↻ REPLAY</button><div class="hint">DRAG TO ROTATE</div></div></header>
+
+<section id="trend" aria-label="Trending cakes"><div class="th"><p class="eyebrow">Trending now</p><h2>Cakes on Demand</h2></div><div id="trk" tabindex="0" aria-label="Trending cakes, swipe to browse"></div></section>
+<section id="showroom"><p class="eyebrow">Interactive Showroom</p><h2>Our Cakes</h2>
+<div class="filters" id="filters"></div><div id="grid"></div></section>
+
+<section class="dark"><p class="eyebrow">Signature</p><h2>Discover Our Signature Creations</h2><div class="sig" id="sig" style="margin-top:50px"></div></section>
+
+<section><p class="eyebrow">Why Lizland Cakes</p><h2>Crafted with passion</h2>
+<div class="why rv"><div><i>✦</i><h3>Creative cake artistry</h3></div><div><i>◈</i><h3>Attention to detail</h3></div><div><i>❖</i><h3>Custom designs</h3></div><div><i>✿</i><h3>Cakes for every occasion</h3></div><div><i>✧</i><h3>Professional decorating</h3></div><div><i>♡</i><h3>Passion for baking</h3></div></div></section>
+
+<section class="dark" id="how"><p class="eyebrow">How to order</p><h2>Three simple steps</h2><div class="why rv"><div><i>1</i><h3>Choose your cake</h3><p>Browse our cakes or design your own.</p></div><div><i>2</i><h3>Share your requirements</h3><p>Tell us the occasion, size, colours, message and date.</p></div><div><i>3</i><h3>Confirm on WhatsApp</h3><p>We confirm the details and your quote with you on WhatsApp.</p></div></div></section>
+<section id="reviews"><p class="eyebrow">Testimonials</p><h2>Kind words</h2><p style="opacity:.7;margin-top:8px">Sample content only. Real customer reviews will replace these placeholders.</p><div class="why rv"><div class="sam"><small>SAMPLE</small><p><em>“Customer testimonial will appear here.”</em></p><p>— Customer name</p></div><div class="sam"><small>SAMPLE</small><p><em>“Customer testimonial will appear here.”</em></p><p>— Customer name</p></div><div class="sam"><small>SAMPLE</small><p><em>“Customer testimonial will appear here.”</em></p><p>— Customer name</p></div></div></section>
+<section class="alt" id="custom"><p class="eyebrow">Custom Cake Designer</p><h2>Design your cake</h2><p>Prices are quoted by the bakery after you send your request.</p>
+<div class="two" style="margin-top:36px"><form id="cf">
+<label>Occasion<select name="occ"><option>Wedding</option><option>Birthday</option><option>Ruracio</option><option>Graduation</option><option>Anniversary</option><option>Other</option></select></label>
+<label>Tiers<select name="tiers"><option>1</option><option>2</option><option>3</option><option>4</option></select></label>
+<label>Colour<input type="color" name="col" value="#f2c4cf"></label>
+<label>Style<select name="style"><option>Buttercream ridges</option><option>Smooth fondant</option><option>Floral sugar flowers</option><option>Drip cake</option><option>Character/theme</option></select></label>
+<div class="chips"><label><input type="checkbox" value="Fresh/sugar flowers">Flowers</label><label><input type="checkbox" value="Gold leaf">Gold</label><label><input type="checkbox" value="Pearls">Pearls</label><label><input type="checkbox" value="Cake toppers">Topper</label><label><input type="checkbox" value="Balloon spheres">Spheres</label></div>
+<label>Message on cake<input name="msg" maxlength="30"></label>
+<label>Collection / delivery<select name="del"><option>Collect from shop</option><option>Delivery (to be confirmed)</option></select></label>
+<label>Event date<input type="date" name="date" required></label>
+<label>Name<input name="name" required></label><label>Phone<input name="phone" type="tel" required></label>
+<label>Additional instructions<textarea name="more" rows="3"></textarea></label>
+<button class="btn gold">REQUEST MY CUSTOM CAKE</button></form>
+<div id="pv"><div class="msg"></div><div class="base"></div></div></div></section>
+
+<section id="training"><div class="two"><div><p class="eyebrow">Training</p><h2>Turn Your Passion for Baking Into an Art.</h2>
+<p style="margin:18px 0">Learn the art of cake baking, decorating and creating beautiful cake masterpieces.</p>
+<a class="btn gold" href="#" data-wa="Hello Lizland Cakes, I would like to ask about cake training.">TRAINING ENQUIRY ON WHATSAPP</a></div>
+<form id="tf"><label>Full name<input name="name" required></label><label>Phone<input name="phone" type="tel" required></label>
+<label>Preferred training<select name="tr"><option>Cake baking</option><option>Cake decorating</option><option>Both</option></select></label>
+<label>Experience<select name="exp"><option>Beginner</option><option>Some experience</option><option>Experienced</option></select></label>
+<label>Message<textarea name="m" rows="3"></textarea></label><button class="btn gold">SEND ENQUIRY</button></form></div></section>
+
+<section class="dark" id="about"><div class="two"><img id="ab" loading="lazy" decoding="async" alt="Baker decorating a cake at Lizland Cakes" style="width:100%;max-height:620px;object-fit:cover;border-radius:260px 260px 8px 8px">
+<div><p class="eyebrow">About</p><h2>Cakes for meaningful celebrations</h2><p style="margin-top:18px">Lizland Cakes is a Thika cake business specializing in cakes for the moments that matter: weddings, birthdays, ruracio, graduations, anniversaries and fully custom designs, each decorated by hand.</p>
+<h3 style="margin:34px 0 10px">On Instagram-style</h3><div class="gram" id="gram"></div></div></div></section>
+
+<section id="contact"><p class="eyebrow">Visit us</p><h2>Contact</h2><div class="two" style="margin-top:30px"><div>
+<p>Jogoo Kimakia, next to ACK Memoria, Thika, Kenya<br>Daily, 8:00 AM – 9:00 PM<br>0746213847</p>
+<div class="soc"><a class="btn gold" href="#" data-wa="Hello Lizland Cakes!">WHATSAPP</a><a class="btn ink" href="tel:+254746213847">CALL</a><a class="btn ink" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Jogoo+Kimakia+next+to+ACK+Memoria+Thika+Kenya">DIRECTIONS</a></div>
+<div class="soc" id="soc"></div></div>
+<form id="qf"><label>Name<input name="name" required></label><label>Phone<input name="phone" type="tel" required></label><label>Message<textarea name="m" rows="4" required></textarea></label><button class="btn gold">SEND VIA WHATSAPP</button></form></div></section>
+<section class="alt" style="text-align:center"><h2>Ready for your masterpiece?</h2><p style="margin:14px 0 26px">Tell us about your celebration and we will take it from there.</p><a class="btn gold" href="#" data-wa="Hello Lizland Cakes, I would like to order a cake.">ORDER ON WHATSAPP</a></section>
+<footer>© Lizland Cakes · Thika, Kenya</footer>
+<div id="sr" role="dialog" aria-modal="true" aria-label="Search Lizland Cakes" hidden><div class="srh"><label class="sri"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="sq" type="search" placeholder="Search cakes, occasions, training…" autocomplete="off" enterkeyhint="search" aria-label="Search"></label><button id="src" aria-label="Close search">✕</button></div><div class="srb"><button id="srt" class="srtrain"><b>Want to be trained?</b><small>Cake baking and decorating classes. Tap to enquire.</small></button><div id="srx"></div></div></div>
+<div id="lb"><button class="x" aria-label="Close">×</button><button class="ar l" aria-label="Previous">‹</button><button class="ar r" aria-label="Next">›</button><img alt=""><h3></h3><p></p><button class="btn gold" id="lbo" style="margin-top:14px">ORDER THIS CAKE</button></div>
+<div id="om" role="dialog" aria-modal="true" aria-label="Order a cake"><form id="ofm"><button type="button" class="x" id="omx" aria-label="Close">×</button><h3 id="omt"></h3><p>Price on request. Lizland Cakes will confirm your quote on WhatsApp.</p><label>Size / tiers<select name="size"><option>1 tier</option><option>2 tiers</option><option>3 tiers</option><option>4 or more tiers</option><option>Not sure, please advise</option></select></label><label>Quantity<input type="number" name="qty" min="1" value="1"></label><label>Customization<textarea name="cust" rows="2" placeholder="Colours, message, theme, flavour…"></textarea></label><label>Collection / delivery date<input type="date" name="date"></label><label>Collection or delivery<select name="del"><option>Collect from shop</option><option>Delivery (to be confirmed)</option></select></label><label>Your name<input name="name"></label><button class="btn gold">ORDER VIA WHATSAPP</button></form></div>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
-const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let sb,cats=[],CK=[],ENQ=[];
-const STATUS=['new','contacted','confirmed','done','cancelled'],TYPES={order:'Cake order',custom:'Custom cake',training:'Training',contact:'Contact'};
-const err=e=>{$('#main').innerHTML='<div class="card">Error: '+esc(e.message||e)+'</div>'};
-async function init(){const c=await fetch('/api/config').then(r=>r.json()).catch(()=>({}));
-if(!c.url||!c.anonKey){$('#lm').textContent='Supabase is not configured on the server yet (SUPABASE_URL and SUPABASE_ANON_KEY).';return}
-sb=supabase.createClient(c.url,c.anonKey);const{data:{session}}=await sb.auth.getSession();if(session)enter()}
-async function enter(){const{data:{user}}=await sb.auth.getUser();if(!user)return;
-const{data}=await sb.from('admins').select('user_id').eq('user_id',user.id);
-if(!data||!data.length){await sb.auth.signOut();$('#lm').textContent='This account is not an administrator.';return}
-$('#login').hidden=true;$('#app').hidden=false;await loadCats();show('cakes')}
-$('#lf').onsubmit=async e=>{e.preventDefault();$('#lm').textContent='';if(!sb)return;
-const{error}=await sb.auth.signInWithPassword({email:$('#em').value.trim(),password:$('#pw').value});
-if(error)return $('#lm').textContent=error.message;enter()};
-$('#out').onclick=async()=>{await sb.auth.signOut();location.reload()};
-document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>show(b.dataset.t));
-function show(t){document.querySelectorAll('[data-t]').forEach(b=>b.classList.toggle('on',b.dataset.t==t));({cakes:renderCakes,enq:renderEnq,cats:renderCats})[t]()}
-async function loadCats(){const{data}=await sb.from('categories').select('name').order('sort').order('name');cats=(data||[]).map(c=>c.name)}
-async function resize(f){const b=await createImageBitmap(f),s=Math.min(1,1400/Math.max(b.width,b.height)),c=document.createElement('canvas');c.width=Math.round(b.width*s);c.height=Math.round(b.height*s);c.getContext('2d').drawImage(b,0,0,c.width,c.height);return new Promise(r=>c.toBlob(r,'image/jpeg',.82))}
-const pathOf=u=>(u||'').split('/cake-photos/')[1];
-async function renderCakes(){const{data,error}=await sb.from('cakes').select('*').order('created_at',{ascending:false});if(error)return err(error);CK=data;
-$('#main').innerHTML=`<h2>Add or edit a cake</h2><form id="cf2" class="card"><input type="hidden" id="cid"><label>Name<input id="cn" required maxlength="80"></label><label>Category<select id="cc">${cats.map(c=>`<option>${esc(c)}</option>`).join('')}</select></label><label>Description<textarea id="cd" rows="3" maxlength="400"></textarea></label><label>Photo (resized automatically)<input id="cp" type="file" accept="image/*"></label><label class="row"><input type="checkbox" id="cpub" checked> Published (visible on the website)</label><p id="cm" role="status"></p><div class="bar"><button class="b gold">Save cake</button><button type="button" class="b" id="cx">Clear</button></div></form><h2>Cakes (${data.length})</h2><div class="grid">${data.map(c=>`<div class="card">${c.image_url?`<img src="${esc(c.image_url)}" alt="">`:''}<b>${esc(c.name)}</b><small>${esc(c.category)}${c.published?'':' · hidden'}</small><div class="bar"><button class="b" data-e="${c.id}">Edit</button><button class="b" data-d="${c.id}">Delete</button></div></div>`).join('')}</div>`;
-$('#cx').onclick=()=>show('cakes');
-$('#cf2').onsubmit=async e=>{e.preventDefault();const m=$('#cm');m.textContent='Saving…';try{
-const id=$('#cid').value,old=CK.find(c=>c.id==id),f=$('#cp').files[0];let url=old?old.image_url:null;
-if(f){const blob=await resize(f),p=crypto.randomUUID()+'.jpg',u=await sb.storage.from('cake-photos').upload(p,blob,{contentType:'image/jpeg'});if(u.error)throw u.error;
-url=sb.storage.from('cake-photos').getPublicUrl(p).data.publicUrl;if(old&&pathOf(old.image_url))await sb.storage.from('cake-photos').remove([pathOf(old.image_url)])}
-if(!url)throw new Error('Please choose a photo.');
-const row={name:$('#cn').value.trim(),category:$('#cc').value,description:$('#cd').value.trim(),image_url:url,published:$('#cpub').checked};
-const r=id?await sb.from('cakes').update(row).eq('id',id):await sb.from('cakes').insert(row);if(r.error)throw r.error;show('cakes')}catch(x){m.textContent='Error: '+(x.message||x)}}}
-async function renderEnq(){const{data,error}=await sb.from('enquiries').select('*').order('created_at',{ascending:false}).limit(300);if(error)return err(error);ENQ=data;
-$('#main').innerHTML=`<h2>Enquiries (${data.length})</h2><div class="bar card" style="display:flex"><select id="ft"><option value="">All types</option>${Object.entries(TYPES).map(([k,v])=>`<option value="${k}">${v}</option>`).join('')}</select><select id="fs"><option value="">All statuses</option>${STATUS.map(s=>`<option>${s}</option>`).join('')}</select></div><div id="el"></div>`;
-$('#ft').onchange=$('#fs').onchange=drawEnq;drawEnq()}
-function drawEnq(){const t=$('#ft').value,s=$('#fs').value;$('#el').innerHTML=ENQ.filter(e=>(!t||e.type==t)&&(!s||e.status==s)).map(e=>{let p=(e.phone||'').replace(/\D/g,'');if(p.startsWith('0'))p='254'+p.slice(1);
-return`<div class="card"><div class="bar"><span class="tag">${esc(TYPES[e.type]||e.type)}</span><small>${new Date(e.created_at).toLocaleString()}</small></div><b>${esc(e.name||'No name')} ${esc(e.phone||'')}</b><pre>${esc(e.message)}</pre><div class="bar"><select data-st="${e.id}">${STATUS.map(x=>`<option${x==e.status?' selected':''}>${x}</option>`).join('')}</select>${p.length>=11?`<a class="b" target="_blank" rel="noopener" href="https://wa.me/${p}">Reply on WhatsApp</a>`:''}<button class="b" data-x="${e.id}">Delete</button></div></div>`}).join('')||'<p>No enquiries yet.</p>'}
-async function renderCats(){await loadCats();$('#main').innerHTML=`<h2>Categories</h2><form id="kf" class="card bar" style="display:flex"><input id="kn" placeholder="New category name" required maxlength="40" style="flex:1"><button class="b gold">Add</button></form>${cats.map(c=>`<div class="card bar" style="display:flex;justify-content:space-between;align-items:center"><span>${esc(c)}</span><button class="b" data-k="${esc(c)}">Delete</button></div>`).join('')}`;
-$('#kf').onsubmit=async e=>{e.preventDefault();const r=await sb.from('categories').insert({name:$('#kn').value.trim(),sort:cats.length+1});if(r.error)return alert(r.error.message);renderCats()}}
-$('#main').onclick=async e=>{const b=e.target.closest('button');if(!b)return;
-if(b.dataset.e){const c=CK.find(x=>x.id==b.dataset.e);$('#cid').value=c.id;$('#cn').value=c.name;$('#cc').value=c.category;$('#cd').value=c.description||'';$('#cpub').checked=c.published;$('#cm').textContent='Editing "'+c.name+'". Choose a new photo only if you want to replace it.';scrollTo({top:0,behavior:'smooth'})}
-if(b.dataset.d&&confirm('Delete this cake permanently?')){const c=CK.find(x=>x.id==b.dataset.d),r=await sb.from('cakes').delete().eq('id',c.id);if(r.error)return alert(r.error.message);if(pathOf(c.image_url))await sb.storage.from('cake-photos').remove([pathOf(c.image_url)]);renderCakes()}
-if(b.dataset.x&&confirm('Delete this enquiry?')){const r=await sb.from('enquiries').delete().eq('id',b.dataset.x);if(r.error)return alert(r.error.message);renderEnq()}
-if(b.dataset.k&&confirm('Delete category "'+b.dataset.k+'"?')){const r=await sb.from('categories').delete().eq('name',b.dataset.k);if(r.error)return alert(r.error.message);renderCats()}};
-$('#main').onchange=async e=>{const s=e.target.closest('select[data-st]');if(!s)return;const r=await sb.from('enquiries').update({status:s.value}).eq('id',s.dataset.st);if(r.error)alert(r.error.message);else{const q=ENQ.find(x=>x.id==s.dataset.st);if(q)q.status=s.value}};
-init();
+const CONFIG={wa:"254746213847",social:{TikTok:{url:"https://www.tiktok.com/@lizlandcakes",label:"@Lizlandcakes"},Facebook:{url:"",label:"Liz Albert"},Instagram:{url:"",label:"Liz Albert"}}}; // paste the exact Facebook and Instagram profile links into url
+const IMG={a:"/images/bake-a.jpg",b:"/images/bake-b.jpg",c:"/images/bake-c.jpg"};
+const CATS=["Wedding","Birthday","Ruracio","Graduation","Anniversary","Baby Shower","Custom","Cupcakes & Pastries"];
+const CAKES=[
+{i:IMG.c,cat:"Wedding",t:"Four-Tier Floral Wedding",d:"Blush marble, gold monogram and hand-made sugar peonies."},
+{i:IMG.a,cat:"Birthday",t:"Official Teenager",d:"Pink buttercream ridges, butterflies and custom toppers."},
+{i:IMG.b,cat:"Birthday",t:"Gold Happy Birthday",d:"Soft lilac ridges, pastel spheres and pearl border."},
+{i:IMG.c,cat:"Custom",t:"Sugar-Flower Celebration Cake",d:"Fluted fondant, gold accents and a floral arch topper.",pos:"15% 85%"}];
+CAKES.push(...[{"i": "/images/cakes/full/01-tall-monogram-wedding-cake.jpg", "th": "/images/cakes/thumb/01-tall-monogram-wedding-cake.jpg", "cat": "Wedding", "t": "Tall Monogram Wedding Cake", "d": "Four tiers with a gold monogram, blush marble and sugar flowers."}, {"i": "/images/cakes/full/02-traditional-clay-pot-cake.jpg", "th": "/images/cakes/thumb/02-traditional-clay-pot-cake.jpg", "cat": "Ruracio", "t": "Traditional Clay Pot Cake", "d": "A sculpted clay pot with serving ladle and diamond details."}, {"i": "/images/cakes/full/03-graduation-cap-cake.jpg", "th": "/images/cakes/thumb/03-graduation-cap-cake.jpg", "cat": "Graduation", "t": "Graduation Cap Cake", "d": "White ridged cake with a graduation cap and silhouettes."}, {"i": "/images/cakes/full/04-pink-crown-birthday-cake.jpg", "th": "/images/cakes/thumb/04-pink-crown-birthday-cake.jpg", "cat": "Birthday", "t": "Pink Crown Birthday Cake", "d": "Pink ridges, gold crown, butterflies and chocolate spheres."}, {"i": "/images/cakes/full/05-money-bag-cake-with-app-icons.jpg", "th": "/images/cakes/thumb/05-money-bag-cake-with-app-icons.jpg", "cat": "Custom", "t": "Money Bag Cake with App Icons", "d": "Fondant money bag with banknotes and app icons."}, {"i": "/images/cakes/full/06-spider-man-two-tier-cake.jpg", "th": "/images/cakes/thumb/06-spider-man-two-tier-cake.jpg", "cat": "Birthday", "t": "Spider-Man Two-Tier Cake", "d": "Two tiers with city skyline and Spider-Man details."}, {"i": "/images/cakes/full/07-african-print-ruracio-cake.jpg", "th": "/images/cakes/thumb/07-african-print-ruracio-cake.jpg", "cat": "Ruracio", "t": "African Print Ruracio Cake", "d": "African print, sugar flowers and sculpted traditional pieces."}, {"i": "/images/cakes/full/08-princess-theme-birthday-cake.jpg", "th": "/images/cakes/thumb/08-princess-theme-birthday-cake.jpg", "cat": "Birthday", "t": "Princess Theme Birthday Cake", "d": "Soft pink cake with princess toppers and butterflies."}, {"i": "/images/cakes/full/09-designer-handbag-cake.jpg", "th": "/images/cakes/thumb/09-designer-handbag-cake.jpg", "cat": "Custom", "t": "Designer Handbag Cake", "d": "Quilted pink fondant handbag with lipstick and perfume."}, {"i": "/images/cakes/full/10-doctor-graduation-cake.jpg", "th": "/images/cakes/thumb/10-doctor-graduation-cake.jpg", "cat": "Graduation", "t": "Doctor Graduation Cake", "d": "Two tiers with a graduation cap, roses and a stethoscope."}, {"i": "/images/cakes/full/11-football-club-two-tier-cake.jpg", "th": "/images/cakes/thumb/11-football-club-two-tier-cake.jpg", "cat": "Birthday", "t": "Football Club Two-Tier Cake", "d": "Red and white tiers with a club crest and gold crown."}, {"i": "/images/cakes/full/12-african-print-cake-with-gold-roses.jpg", "th": "/images/cakes/thumb/12-african-print-cake-with-gold-roses.jpg", "cat": "Ruracio", "t": "African Print Cake with Gold Roses", "d": "Chocolate cake with African print and gold sugar roses."}, {"i": "/images/cakes/full/13-kiondo-basket-cake.jpg", "th": "/images/cakes/thumb/13-kiondo-basket-cake.jpg", "cat": "Ruracio", "t": "Kiondo Basket Cake", "d": "A woven kiondo basket sculpted in colourful piped patterns."}, {"i": "/images/cakes/full/14-kiondo-basket-cake-another-angle.jpg", "th": "/images/cakes/thumb/14-kiondo-basket-cake-another-angle.jpg", "cat": "Ruracio", "t": "Kiondo Basket Cake, Another Angle", "d": "The kiondo cake with cookie logs and crumb details."}, {"i": "/images/cakes/full/15-first-grade-celebration-cake.jpg", "th": "/images/cakes/thumb/15-first-grade-celebration-cake.jpg", "cat": "Graduation", "t": "First Grade Celebration Cake", "d": "Pink ombre cake with unicorns and a school theme."}, {"i": "/images/cakes/full/16-two-tier-chocolate-and-cream-cake.jpg", "th": "/images/cakes/thumb/16-two-tier-chocolate-and-cream-cake.jpg", "cat": "Anniversary", "t": "Two-Tier Chocolate and Cream Cake", "d": "Cream and chocolate tiers with autumn-toned sugar flowers."}, {"i": "/images/cakes/full/17-lady-in-red-hat-cake.jpg", "th": "/images/cakes/thumb/17-lady-in-red-hat-cake.jpg", "cat": "Birthday", "t": "Lady in Red Hat Cake", "d": "White cake with a printed lady in a red hat and butterflies."}, {"i": "/images/cakes/full/18-red-roses-birthday-cake.jpg", "th": "/images/cakes/thumb/18-red-roses-birthday-cake.jpg", "cat": "Birthday", "t": "Red Roses Birthday Cake", "d": "White ridged cake with red roses and a black topper."}, {"i": "/images/cakes/full/19-floral-30th-birthday-cake.jpg", "th": "/images/cakes/thumb/19-floral-30th-birthday-cake.jpg", "cat": "Birthday", "t": "Floral 30th Birthday Cake", "d": "Peach cake with pearls, flowers and gold lettering."}, {"i": "/images/cakes/full/20-butterfly-birthday-cake.jpg", "th": "/images/cakes/thumb/20-butterfly-birthday-cake.jpg", "cat": "Birthday", "t": "Butterfly Birthday Cake", "d": "Pink cake with butterflies, pearls and sprinkles."}, {"i": "/images/cakes/full/21-two-tier-gold-birthday-cake.jpg", "th": "/images/cakes/thumb/21-two-tier-gold-birthday-cake.jpg", "cat": "Birthday", "t": "Two-Tier Gold Birthday Cake", "d": "White and terracotta tiers with gold lettering and spheres."}, {"i": "/images/cakes/full/22-football-pitch-cake.jpg", "th": "/images/cakes/thumb/22-football-pitch-cake.jpg", "cat": "Birthday", "t": "Football Pitch Cake", "d": "A pitch-shaped cake with players, goals and red lettering."}, {"i": "/images/cakes/full/23-blue-football-birthday-cake.jpg", "th": "/images/cakes/thumb/23-blue-football-birthday-cake.jpg", "cat": "Birthday", "t": "Blue Football Birthday Cake", "d": "Blue and white tiers with a football topper and gold stars."}, {"i": "/images/cakes/full/24-black-bow-heart-cake.jpg", "th": "/images/cakes/thumb/24-black-bow-heart-cake.jpg", "cat": "Birthday", "t": "Black Bow Heart Cake", "d": "White cake with black hearts and ribbon bows."}, {"i": "/images/cakes/full/25-yellow-and-red-peony-cake.jpg", "th": "/images/cakes/thumb/25-yellow-and-red-peony-cake.jpg", "cat": "Birthday", "t": "Yellow and Red Peony Cake", "d": "Yellow buttercream with red peonies and gold lettering."}, {"i": "/images/cakes/full/26-blue-ombre-football-cake.jpg", "th": "/images/cakes/thumb/26-blue-ombre-football-cake.jpg", "cat": "Birthday", "t": "Blue Ombre Football Cake", "d": "Blue ombre cake with football toppers and a club crest."}, {"i": "/images/cakes/full/27-money-bag-birthday-cake.jpg", "th": "/images/cakes/thumb/27-money-bag-birthday-cake.jpg", "cat": "Birthday", "t": "Money Bag Birthday Cake", "d": "Fondant money bag with banknotes and a birthday plaque."}, {"i": "/images/cakes/full/28-money-bag-cake.jpg", "th": "/images/cakes/thumb/28-money-bag-cake.jpg", "cat": "Custom", "t": "Money Bag Cake", "d": "White fondant money bag with a dollar sign and banknotes."}, {"i": "/images/cakes/full/29-guild-celebration-cake.jpg", "th": "/images/cakes/thumb/29-guild-celebration-cake.jpg", "cat": "Custom", "t": "Guild Celebration Cake", "d": "Blue ombre cake with a sash, badge and fresh-look flowers."}, {"i": "/images/cakes/full/30-guild-congratulations-cake.jpg", "th": "/images/cakes/thumb/30-guild-congratulations-cake.jpg", "cat": "Custom", "t": "Guild Congratulations Cake", "d": "White and blue cake with a badge, gold spheres and greenery."}, {"i": "/images/cakes/full/31-blue-crown-cake.jpg", "th": "/images/cakes/thumb/31-blue-crown-cake.jpg", "cat": "Baby Shower", "t": "Blue Crown Cake", "d": "Powder blue buttercream with a crown and satin ribbons."}]);
+const wa=t=>`https://wa.me/${CONFIG.wa}?text=${encodeURIComponent(t)}`;
+document.querySelectorAll('[data-wa]').forEach(a=>{a.href=wa(a.dataset.wa);a.target="_blank";a.rel="noopener"});
+const $=s=>document.querySelector(s);
+// gallery
+let cur="All",LIM=12;const f=$('#filters'),g=$('#grid');
+function buildF(){f.innerHTML="";["All",...CATS].forEach(c=>{const b=document.createElement('button');b.textContent=c;b.onclick=()=>{cur=c;LIM=12;draw()};f.append(b)})}buildF();
+function draw(){[...f.children].forEach(b=>b.classList.toggle('on',b.textContent==cur));g.innerHTML="";
+const l=CAKES.filter(x=>cur=="All"||x.cat==cur);
+if(!l.length){g.innerHTML=`<div class="empty"><h3>${cur} cakes</h3><p>Photos for this category are being added. Ask Lizland Cakes on WhatsApp to see recent ${cur.toLowerCase()} designs.</p><br><a class="btn ink" target="_blank" href="${wa('Hello, please show me your '+cur+' cakes.')}">ASK ON WHATSAPP</a></div>`;return}
+l.slice(0,LIM).forEach(x=>{const d=document.createElement('div');d.className='tile';d.innerHTML=`<img loading="lazy" decoding="async" src="${x.th||x.i}" alt="${x.t} – ${x.cat} cake by Lizland Cakes" style="${x.pos?'aspect-ratio:3/4;object-fit:cover;object-position:'+x.pos:''}"><div><small>${x.cat}</small><h3>${x.t}</h3></div>`;d.onclick=()=>open(x,l);d.tabIndex=0;d.setAttribute('role','button');d.onkeydown=e=>{if(e.key=='Enter')open(x,l)};g.append(d)});if(l.length>LIM){const m=document.createElement('button');m.className='btn ink more';m.textContent='SHOW MORE CAKES ('+(l.length-LIM)+')';m.onclick=()=>{LIM+=12;draw()};g.append(m)}}
+const lb=$('#lb'),lbi=lb.querySelector('img');let LST=CAKES,LI=0;
+function show(){const x=LST[LI];lbi.src=x.i;lbi.alt=x.t;lb.querySelector('h3').textContent=x.t;lb.querySelector('p').textContent=x.cat+" · "+x.d+" · Price on request";lb.querySelectorAll('.ar').forEach(b=>b.style.display=LST.length>1?'':'none')}
+function open(x,l=CAKES){LST=l;LI=l.indexOf(x);show();lb.classList.add('on')}
+function step(n){LI=(LI+n+LST.length)%LST.length;show()}
+lb.onclick=e=>{if(e.target==lb||e.target.classList.contains('x'))lb.classList.remove('on')};
+lb.querySelector('.l').onclick=()=>step(-1);lb.querySelector('.r').onclick=()=>step(1);
+let sx=0;lb.ontouchstart=e=>sx=e.touches[0].clientX;lb.ontouchend=e=>{const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>50)step(d<0?1:-1)};draw();
+function renderSig(){$('#sig').innerHTML=CAKES.slice(0,3).map((x,n)=>`<div class="sg rv"><div class="im"><img loading="lazy" src="${x.i}" alt="${x.t}"></div><div><p class="eyebrow">${x.cat}</p><h2>${x.t}</h2><p style="margin-top:14px">${x.d}</p><div class="row"><button class="btn" data-n="${n}">VIEW DETAILS</button><button class="btn gold" data-o="${n}">ORDER VIA WHATSAPP</button></div></div></div>`).join("");
+document.querySelectorAll('[data-n]').forEach(b=>b.onclick=()=>open(CAKES[b.dataset.n]));document.querySelectorAll('[data-o]').forEach(b=>b.onclick=()=>orderCake(CAKES[b.dataset.o]));}renderSig();
+$('#gram').innerHTML=CAKES.slice(0,9).map(x=>x.th||x.i).map(s=>`<img loading="lazy" src="${s}" alt="Lizland Cakes creation">`).join("");
+$('#soc').innerHTML=Object.entries(CONFIG.social).map(([k,v])=>v.url?`<a class="btn ink" target="_blank" rel="noopener" href="${v.url}">${k.toUpperCase()} · ${v.label}</a>`:`<span class="btn ink" style="opacity:.75" title="Profile link coming soon">${k.toUpperCase()} · ${v.label}</span>`).join("");
+// nav, reveal, loader
+const mn=$('#menu'),bg=$('#burger'),nv=document.querySelector('nav');
+function tog(o){$('#scrim').classList.toggle('on',o);document.body.classList.toggle('mo',o);mn.classList.toggle('open',o);bg.setAttribute('aria-expanded',o);bg.textContent=o?'✕':'☰';document.body.style.overflow=o?'hidden':''}
+bg.onclick=()=>tog(!mn.classList.contains('open'));mn.onclick=e=>{if(e.target.closest('a'))tog(false)};
+addEventListener('keydown',e=>{if(e.key=='Escape'){tog(false);lb.classList.remove('on');closeSr()}if(lb.classList.contains('on')){if(e.key=='ArrowRight')step(1);if(e.key=='ArrowLeft')step(-1)}});
+addEventListener('scroll',()=>{nv.classList.toggle('sc',scrollY>40);document.documentElement.style.setProperty('--bt',Math.max(0,34-scrollY)+'px');$('#top').hidden=scrollY<700},{passive:true});
+const so=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting)mn.querySelectorAll(':scope>li>a').forEach(a=>a.classList.toggle('act',a.getAttribute('href')=='#'+x.target.id))}),{rootMargin:'-45% 0px -50% 0px'});
+['hero','showroom','custom','training','about','contact'].forEach(id=>so.observe(document.getElementById(id)));
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('in')),{threshold:.15});
+document.querySelectorAll('.rv').forEach(e=>io.observe(e));
+for(let k=0;k<14;k++){const s=document.createElement('i');s.className='sp';s.style.cssText=`left:${Math.random()*100}%;animation-delay:${Math.random()*4}s`;$('#load').append(s)}
+const tL=performance.now(),rmL=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function hideL(){const l=$('#load');if(!l)return;l.classList.add('out');window.__pour&&window.__pour();setTimeout(()=>l.remove(),1500)}
+const waitL=()=>setTimeout(hideL,Math.max(0,(rmL?300:4600)-(performance.now()-tL)));
+document.readyState=='complete'?waitL():addEventListener('load',waitL);$('#load').addEventListener('click',hideL);setTimeout(hideL,9000);
+// forms -> WhatsApp
+function send(form,build){form.onsubmit=e=>{e.preventDefault();if(!form.checkValidity())return form.reportValidity();open2(wa(build(Object.fromEntries(new FormData(form)))))}}
+const open2=u=>{try{const t=new URL(u).searchParams.get('text')||'',f=t.split('\n')[0],type=/Custom/.test(f)?'custom':/Training/.test(f)?'training':/order/i.test(f)?'order':'contact',g=k=>(t.match(new RegExp('^'+k+': (.*)$','m'))||[])[1]||'';fetch('/api/enquiries',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({type,name:g('Name'),phone:g('Phone'),message:t,website:''})}).catch(()=>{})}catch(e){}window.open(u,'_blank','noopener')};
+send($('#cf'),d=>`*Custom cake request*\nName: ${d.name}\nPhone: ${d.phone}\nOccasion: ${d.occ}\nTiers: ${d.tiers}\nColour: ${d.col}\nStyle: ${d.style}\nDecorations: ${[...$('#cf').querySelectorAll('.chips input:checked')].map(c=>c.value).join(', ')||'-'}\nMessage: ${d.msg||'-'}\nCollection/delivery: ${d.del}\nEvent date: ${d.date}\nNotes: ${d.more||'-'}`);
+send($('#tf'),d=>`*Training enquiry*\nName: ${d.name}\nPhone: ${d.phone}\nTraining: ${d.tr}\nExperience: ${d.exp}\nMessage: ${d.m||'-'}`);
+send($('#qf'),d=>`*Enquiry*\nName: ${d.name}\nPhone: ${d.phone}\n${d.m}`);
+// live preview
+const cf=$('#cf'),pv=$('#pv');function prev(){const n=+cf.tiers.value;pv.querySelectorAll('.t').forEach(e=>e.remove());
+for(let i=0;i<n;i++){const t=document.createElement('div');t.className='t';const w=260-i*(200/Math.max(n,2));t.style.cssText=`width:${w}px;height:${Math.min(70,260/n)}px;background:${cf.col.value};margin-bottom:-2px`;pv.insertBefore(t,pv.querySelector('.base').nextSibling)}
+pv.querySelector('.msg').textContent=cf.msg.value}
+cf.oninput=cf.onchange=prev;prev();
+// load cakes added in the admin dashboard
+fetch('/api/cakes').then(r=>r.ok?r.json():null).then(d=>{if(!d)return;const S=s=>String(s||'').replace(/[<>"]/g,'');(d.categories||[]).forEach(c=>{c=S(c);if(c&&!CATS.includes(c))CATS.push(c)});
+const db=(d.cakes||[]).filter(x=>/^https:\/\//.test(x.image_url||'')).map(x=>({i:x.image_url,cat:S(x.category),t:S(x.name),d:S(x.description),db:1}));
+if(db.length||(d.categories||[]).length){CAKES.unshift(...db);buildF();draw();renderSig();renderTrend()}}).catch(()=>{});
+// cake city style nav + ordering
+$('#scrim').onclick=()=>tog(false);$('#top').onclick=()=>scrollTo({top:0,behavior:'smooth'});
+document.querySelectorAll('.sub').forEach(b=>b.onclick=()=>{const p=b.parentElement;p.classList.toggle('open');b.textContent=p.classList.contains('open')?'−':'+'});
+document.querySelectorAll('[data-cat]').forEach(a=>a.addEventListener('click',()=>{cur=a.dataset.cat;LIM=12;draw()}));
+const om=$('#om'),ofm=$('#ofm');let OC=null;
+function orderCake(x){OC=x;$('#omt').textContent=x.t;lb.classList.remove('on');om.classList.add('on')}
+$('#lbo').onclick=()=>orderCake(LST[LI]);$('#omx').onclick=()=>om.classList.remove('on');om.onclick=e=>{if(e.target==om)om.classList.remove('on')};
+ofm.onsubmit=e=>{e.preventDefault();const d=Object.fromEntries(new FormData(ofm));open2(wa(`*Cake order enquiry*\nCake: ${OC.t} (${OC.cat})\nSize/tiers: ${d.size}\nQuantity: ${d.qty}\nCustomization: ${d.cust||'-'}\nDate: ${d.date||'-'}\nCollection/delivery: ${d.del}\nName: ${d.name||'-'}`));om.classList.remove('on')};
+// search + trending cakes
+const E=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const sr=$('#sr'),sq=$('#sq'),srx=$('#srx');let SR=[];
+const norm=s=>String(s||'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+const lev=(a,b)=>{if(a==b)return 0;const m=a.length,n=b.length;if(Math.abs(m-n)>2)return 9;let p=Array.from({length:n+1},(_,j)=>j);for(let i=1;i<=m;i++){const c=[i];for(let j=1;j<=n;j++)c[j]=Math.min(p[j]+1,c[j-1]+1,p[j-1]+(a[i-1]==b[j-1]?0:1));p=c}return p[n]};
+const STOP=new Set('cake cakes the a an for of i me to be want need is my in on with and'.split(' '));
+const SYNC={Wedding:'bride groom marriage',Birthday:'bday party',Ruracio:'dowry traditional',Graduation:'graduate school degree',Anniversary:'couple love','Baby Shower':'baby newborn',Custom:'design theme personalised','Cupcakes & Pastries':'cupcake cupcakes pastry pastries'};
+const PAGES=[
+{t:'Cake training',d:'Learn baking and decorating',k:'training train trained learn class classes course lessons teach baking decorating student',go:'#training'},
+{t:'Design a custom cake',d:'Pick colours, tiers and decorations',k:'custom order design own designer request quote price pricing cost',go:'#custom'},
+{t:'How to order',d:'Three simple steps',k:'how order process steps buy',go:'#how'},
+{t:'Opening hours',d:'Daily, 8:00 AM – 9:00 PM',k:'open opening hours time close closing when daily today',go:'#contact'},
+{t:'Location and directions',d:'Jogoo Kimakia, next to ACK Memoria, Thika',k:'location where address directions map thika find shop jogoo kimakia ack memoria',go:'#contact'},
+{t:'Call or WhatsApp',d:'0746213847',k:'call phone whatsapp number contact reach chat',go:'#contact'},
+{t:'About Lizland Cakes',d:'Our story',k:'about story baker lizland who',go:'#about'}];
+const SUG=['Birthday cakes','Wedding cakes','Ruracio cakes','Graduation cakes','Custom cakes','Baby shower cakes','Football cakes','Custom order','Opening hours','Location'];
+function pre(a,b){let i=0;while(i<a.length&&i<b.length&&a[i]==b[i])i++;return i}
+function score(qt,kt){let mx=0,sum=0;for(const q of qt){let b=0;for(const w of kt){if(w==q)b=Math.max(b,3);else if(q.length>2&&(w.startsWith(q)||(q.startsWith(w)&&w.length>3)))b=Math.max(b,2);else if(q.length>3&&(lev(q,w)<=(q.length>5?2:1)||(pre(q,w)>=4&&pre(q,w)>=Math.min(q.length,w.length)*.6)))b=Math.max(b,1.5)}sum+=b;mx=Math.max(mx,b)}return mx+.25*(sum-mx)}
+function goTo(sel){closeSr();setTimeout(()=>{const el=document.querySelector(sel);el&&el.scrollIntoView({behavior:'smooth'})},60)}
+function renderSr(raw){const q=norm(raw);
+const chips=()=>'<div class="chips2">'+SUG.map(s=>`<button class="sch" data-q="${E(s)}">${E(s)}</button>`).join('')+'</div>';
+if(!q){SR=[];srx.innerHTML='<p class="sl">Popular searches</p>'+chips();return}
+let qt=q.split(' ').filter(w=>!STOP.has(w));const all=!qt.length;if(all)qt=['x'];
+const R=[];
+if(!all){CATS.forEach(c=>{if(score(qt,norm(c+' '+(SYNC[c]||'')).split(' '))>=2){const n=CAKES.filter(x=>x.cat==c).length;R.push({s:9,t:'All '+c+' cakes',d:n?n+' photo'+(n>1?'s':''):'Ask us on WhatsApp',go:()=>{closeSr();cur=c;LIM=12;draw();setTimeout(()=>$('#showroom').scrollIntoView({behavior:'smooth'}),60)}})}});
+PAGES.forEach(p=>{const s=score(qt,norm(p.k+' '+p.t).split(' '));if(s>=1.5)R.push({s:s+1,t:p.t,d:p.d,go:()=>goTo(p.go)})})}
+const cakes=[];CAKES.forEach(x=>{const s=all?1:score(qt,norm(x.t+' '+x.cat+' '+x.d+' '+(SYNC[x.cat]||'')).split(' '));if(s>=1.5||all)cakes.push({s,x})});
+cakes.sort((a,b)=>b.s-a.s);const cl=cakes.slice(0,8).map(c=>c.x);
+cl.forEach((x,i)=>R.push({s:cakes[i].s,img:x.th||x.i,t:x.t,d:x.cat,go:()=>{closeSr();open(x,cl)}}));
+R.sort((a,b)=>b.s-a.s);SR=R.slice(0,10);
+SR.push({t:'Cannot find it? Ask on WhatsApp',d:'We will reply with options',go:()=>{window.open(wa('Hello Lizland Cakes, I am looking for: '+raw.trim()),'_blank','noopener')}});
+srx.innerHTML=(SR.length>1?'<p class="sl">Best matches</p>':'<p class="sl">No exact match. Try one of these:</p>'+chips())+SR.map((r,i)=>`<button class="srr" data-i="${i}">${r.img?`<img src="${E(r.img)}" alt="">`:'<span class="ic">→</span>'}<span><b>${E(r.t)}</b><small>${E(r.d)}</small></span></button>`).join('')}
+srx.onclick=e=>{const c=e.target.closest('[data-q]');if(c){sq.value=c.dataset.q;renderSr(sq.value);return}const r=e.target.closest('[data-i]');if(r)SR[r.dataset.i].go()};
+sq.oninput=()=>renderSr(sq.value);sq.onkeydown=e=>{if(e.key=='Enter'&&SR[0])SR[0].go()};
+function openSr(){tog(false);sr.hidden=false;document.body.style.overflow='hidden';sq.value='';renderSr('');setTimeout(()=>sq.focus(),60)}
+function closeSr(){if(sr.hidden)return;sr.hidden=true;document.body.style.overflow=''}
+$('#sbtn').onclick=openSr;$('#src').onclick=closeSr;
+$('#srt').onclick=()=>{goTo('#training');setTimeout(()=>{const i=document.querySelector('#tf input');i&&i.focus({preventScroll:true})},900)};
+// trending strip, auto-scrolls
+const TREND=['Tall Monogram Wedding Cake','Traditional Clay Pot Cake','Money Bag Cake with App Icons','Pink Crown Birthday Cake','Spider-Man Two-Tier Cake','Designer Handbag Cake','Doctor Graduation Cake','Football Club Two-Tier Cake','African Print Ruracio Cake','Princess Theme Birthday Cake','Kiondo Basket Cake','Butterfly Birthday Cake','Floral 30th Birthday Cake','Blue Crown Cake'];
+function renderTrend(){const trk=$('#trk'),L=[...CAKES.filter(x=>x.db).slice(0,6),...TREND.map(t=>CAKES.find(x=>x.t==t)).filter(Boolean)];trk.dataset.n=L.length;trk.innerHTML='';
+[...L,...L].forEach((x,i)=>{const a=document.createElement('button');a.className='tc';if(i>=L.length){a.setAttribute('aria-hidden','true');a.tabIndex=-1}a.innerHTML=`<img loading="lazy" decoding="async" src="${E(x.th||x.i)}" alt="${E(x.t)}"><span><small>${E(x.cat)}</small>${E(x.t)}</span>`;a.onclick=()=>open(x,L);trk.append(a)})}
+renderTrend();
+(function(){const trk=$('#trk'),rm=matchMedia('(prefers-reduced-motion:reduce)').matches;let paused=false,vis=true,last=0,acc=0,timer;
+new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(trk);
+const stop=()=>{paused=true;clearTimeout(timer)},go=()=>{clearTimeout(timer);timer=setTimeout(()=>paused=false,2500)};
+['pointerdown','touchstart','wheel','mouseenter','focusin'].forEach(e=>trk.addEventListener(e,stop,{passive:true}));
+['pointerup','touchend','touchcancel','mouseleave','focusout'].forEach(e=>trk.addEventListener(e,go,{passive:true}));
+const half=()=>{const n=+trk.dataset.n;return trk.children[n]?trk.children[n].offsetLeft-trk.children[0].offsetLeft:0};
+trk.addEventListener('scroll',()=>{const h=half();if(h&&trk.scrollLeft>=h)trk.scrollLeft-=h},{passive:true});
+(function tick(t){requestAnimationFrame(tick);if(rm||paused||!vis||document.hidden){last=t;return}acc+=(t-last)*.05;last=t;if(acc>=1){const px=Math.floor(acc);acc-=px;trk.scrollLeft+=px}})(0)})();
+// 3D cake: batter pours, cake forms, then rotates
+$('#fb').src=IMG.c;$('#bg').src=IMG.c;$('#ab').src=IMG.c;
+addEventListener('DOMContentLoaded',function(){const st=$('#stage'),fb=$('#fb');
+try{const cv=document.createElement('canvas');if(!(cv.getContext('webgl')||cv.getContext('experimental-webgl'))||typeof THREE=='undefined')throw 0;
+const low=(navigator.hardwareConcurrency||4)<=2,rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const r=new THREE.WebGLRenderer({antialias:!low,alpha:true});r.setPixelRatio(Math.min(devicePixelRatio,low?1:1.5));st.prepend(r.domElement);
+const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(35,1,.1,100);cam.position.set(0,3.4,12.5);cam.lookAt(0,3,0);
+sc.add(new THREE.AmbientLight(0xffffff,.55));const L=new THREE.DirectionalLight(0xfff0e0,1);L.position.set(4,9,6);sc.add(L);const L2=new THREE.PointLight(0xff9fbd,1,30);L2.position.set(-5,4,4);sc.add(L2);
+const M=(c,rg=.5)=>new THREE.MeshStandardMaterial({color:c,roughness:rg}),gold=new THREE.MeshStandardMaterial({color:0xe6a0a8,metalness:.85,roughness:.3});
+const cake=new THREE.Group();sc.add(cake);
+const cl=x=>Math.min(1,Math.max(0,x)),ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2,back=x=>{x=cl(x);return 1+2.7*Math.pow(x-1,3)+1.7*Math.pow(x-1,2)};
+const H=1,B=.15,R=[2.1,1.75,1.45,1.15],FIN=[0xfdf3ea,0xf4b6c4,0x6b3b2c,0xfdf3ea].map(c=>new THREE.Color(c)),BAT=new THREE.Color(0xf7a9c0);
+const S0=.9,GAP=2.1,DUR=2,END=S0+3*GAP+DUR;
+const tiers=R.map((rad,i)=>{const g=new THREE.CylinderGeometry(rad,rad,H,64);g.translate(0,H/2,0);
+const t=new THREE.Mesh(g,new THREE.MeshPhysicalMaterial({color:BAT.clone(),roughness:.35,clearcoat:.8,clearcoatRoughness:.2}));t.position.y=B+i*H;t.scale.y=.001;t.visible=false;cake.add(t);return t});
+const plate=new THREE.Mesh(new THREE.CylinderGeometry(2.7,2.7,B,64),gold);plate.position.y=B/2;cake.add(plate);
+const decor=[];const add=(o,d,s=1)=>{o.userData={d,s};o.scale.setScalar(.001);cake.add(o);decor.push(o)};
+const pg=new THREE.SphereGeometry(.07,10,8),pw=M(0xffffff,.2);
+R.forEach((rad,i)=>{const d=S0+i*GAP+DUR,n=low?16:30;for(let k=0;k<n;k++){const a=k/n*6.283,p=new THREE.Mesh(pg,pw);p.position.set(Math.cos(a)*(rad+.02),B+i*H+.07,Math.sin(a)*(rad+.02));add(p,d+k*.01)}
+if(i<3){const t=new THREE.Mesh(new THREE.TorusGeometry(rad,.03,8,64),gold);t.rotation.x=Math.PI/2;t.position.y=B+(i+1)*H;add(t,d)}});
+const fg=new THREE.SphereGeometry(.03,6,6);for(let k=0;k<(low?20:40);k++){const a=Math.random()*6.283,f=new THREE.Mesh(fg,gold);f.position.set(Math.cos(a)*(R[0]+.01),B+.1+Math.random()*.8,Math.sin(a)*(R[0]+.01));add(f,S0+DUR+Math.random()*.5)}
+const petal=new THREE.SphereGeometry(.16,12,10),cen=new THREE.SphereGeometry(.07,10,8),pm=[M(0xf3b3b8),M(0xffffff),M(0xe99aa6)];
+function flower(m){const g=new THREE.Group();for(let j=0;j<6;j++){const p=new THREE.Mesh(petal,m),a=j/6*6.283;p.position.set(Math.cos(a)*.15,Math.sin(a)*.15,0);p.scale.set(1,1,.4);g.add(p)}const c=new THREE.Mesh(cen,gold);c.position.z=.08;g.add(c);return g}
+const NF=low?10:15;for(let k=0;k<NF;k++){const t=k/(NF-1),y=B+4*H-.25-t*(4*H-.6),ti=Math.min(3,Math.floor((y-B)/H)),a=.4+t*2.4+(k%2?.18:-.18),rad=R[ti]+.08,f=flower(pm[k%3]);f.position.set(Math.cos(a)*rad,y,Math.sin(a)*rad);f.rotation.y=Math.PI/2-a;add(f,END+.2+k*.1,.7+t*.7)}
+for(let k=0;k<3;k++){const a=k*2.1,f=flower(pm[k]);f.position.set(Math.cos(a)*.45,B+4*H+.05,Math.sin(a)*.45);f.rotation.x=-Math.PI/2;add(f,END+1.8+k*.15,.8)}
+const bm=new THREE.MeshPhysicalMaterial({color:0xf7a9c0,roughness:.2,clearcoat:1}),stream=new THREE.Mesh(new THREE.CylinderGeometry(1,1,1,20),bm),splash=new THREE.Mesh(new THREE.SphereGeometry(.35,20,12),bm);sc.add(stream,splash);
+const pgm=new THREE.BufferGeometry(),pts=[];for(let i=0;i<(low?40:100);i++)pts.push((Math.random()-.5)*10,Math.random()*7,(Math.random()-.5)*6);
+pgm.setAttribute('position',new THREE.Float32BufferAttribute(pts,3));const P=new THREE.Points(pgm,new THREE.PointsMaterial({color:0xffc2d4,size:.05}));sc.add(P);
+const TOP=7.6;let t0=rm?performance.now()-30000:performance.now()+1e7,down=0,lx=0;window.__pour=()=>{if(!rm)t0=performance.now()};if(!$('#load'))window.__pour();let vis=true;new IntersectionObserver(e=>vis=e[0].isIntersecting).observe(st);
+function upd(t){plate.scale.setScalar(Math.max(.001,ease(cl((t-.4)/.8))));let fillTop=B;
+tiers.forEach((m,i)=>{const s=S0+i*GAP,p=cl((t-s)/DUR),e=ease(p);m.visible=p>0;m.scale.y=Math.max(.001,e);if(p>0)fillTop=B+i*H+H*e;m.material.color.lerpColors(BAT,FIN[i],ease(cl((t-s-DUR)/1.4)))});
+const bot=Math.max(fillTop,TOP-7.4*cl((t-.2)/.7)),w=t>END?Math.max(0,.11*(1-(t-END)/.5)):(t>.2?.11+.025*Math.sin(t*18):0);
+stream.visible=w>.002;stream.scale.set(w,TOP-bot,w);stream.position.y=bot+(TOP-bot)/2;
+splash.visible=stream.visible&&t>.8;const q=1.2+.2*Math.sin(t*11);splash.scale.set(q,.3,q);splash.position.y=fillTop+.02;
+decor.forEach(o=>o.scale.setScalar(Math.max(.001,back((t-o.userData.d)/.6)*o.userData.s)))}
+st.onpointerdown=e=>{down=1;lx=e.clientX};addEventListener('pointerup',()=>down=0);
+addEventListener('pointermove',e=>{if(down){cake.rotation.y+=(e.clientX-lx)*.01;lx=e.clientX}});
+$('#replay').onclick=e=>{e.stopPropagation();t0=performance.now()};
+function rs(){const w=st.clientWidth,h=st.clientHeight;r.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}addEventListener('resize',rs);rs();
+(function loop(){requestAnimationFrame(loop);if(!vis||document.hidden)return;upd((performance.now()-t0)/1000);if(!down&&!rm)cake.rotation.y+=.006;P.rotation.y+=rm?0:.0008;r.render(sc,cam)})();
+}catch(e){fb.style.display='block';$('#replay').style.display='none'}});
 </script></body></html>
