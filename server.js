@@ -1,4 +1,5 @@
 const express = require('express');
+const fs = require('fs');
 const path = require('path');
 const app = express();
 
@@ -71,9 +72,17 @@ app.post('/api/enquiries', async (req, res) => {
   }
 });
 
+// The home page is served with the real site address filled in (canonical link, share image).
+// Set SITE_URL (for example https://www.yourdomain.co.ke) once you have a domain; until then the request address is used.
+const INDEX = fs.readFileSync(path.join(__dirname, 'public', 'index.html'), 'utf8');
+const baseUrl = (req) => (process.env.SITE_URL || `${req.protocol}://${req.get('host')}`).replace(/\/$/, '');
+const sendIndex = (req, res, status = 200) =>
+  res.status(status).type('html').send(INDEX.split('%SITE_URL%').join(baseUrl(req)));
+app.get(['/', '/index.html'], (req, res) => sendIndex(req, res));
+
 app.use(express.static(path.join(__dirname, 'public'), { extensions: ['html'], maxAge: '1h' }));
 app.get('/health', (req, res) => res.json({ ok: true }));
-app.use((req, res) => res.status(404).sendFile(path.join(__dirname, 'public', 'index.html')));
+app.use((req, res) => sendIndex(req, res, 404));
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Lizland Cakes running on http://localhost:${port}`));
